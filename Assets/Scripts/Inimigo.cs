@@ -7,6 +7,7 @@ public class Inimigo : MonoBehaviour
     public GameObject leftPositionObject, rightPositionObject;
     private float lefPosition, rightPosition;
     public float speed;
+     private bool isGrounded;
     
 
     private  void Start()
@@ -30,6 +31,24 @@ public class Inimigo : MonoBehaviour
         {
             transform.position = new Vector2 (rightPosition, transform.position.y);
             speed*= -1;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 
