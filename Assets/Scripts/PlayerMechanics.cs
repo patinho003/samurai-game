@@ -75,11 +75,17 @@ public class PlayerMechanics : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-
+        if (col.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }     
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        
+        if (col.gameObject.tag == "Ground")
+       {
+            isGrounded = false;
+       }
     }
 }
