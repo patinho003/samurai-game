@@ -7,9 +7,11 @@ public class Inimigo : MonoBehaviour
     public GameObject leftPositionObject, rightPositionObject;
     private float lefPosition, rightPosition;
     public float speed;
+    public float distancia;
     private bool isGrounded;
     private Rigidbody2D rigidBody;
     private int move;
+    public Transform playerPos;
     
 
     private  void Start()
@@ -22,11 +24,17 @@ public class Inimigo : MonoBehaviour
 
     void Update()
     {
+        distancia = Vector2.Distance(transform.position, playerPos.position);
 
+        if (distancia < 15)
+        {
+            segueP();
+            
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         rigidBody.velocity = new Vector2(move * speed , rigidBody.velocity.y);
 
@@ -41,7 +49,7 @@ public class Inimigo : MonoBehaviour
             rigidBody.position = new Vector2 (rightPosition, rigidBody.position.y);
             move = -1;
         }
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -61,7 +69,11 @@ public class Inimigo : MonoBehaviour
         }
     }
 
-
+    private void segueP ()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
+       
+    }
 
 
 }
