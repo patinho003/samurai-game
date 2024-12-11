@@ -75,6 +75,10 @@ public class PlayerMechanics : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.CompareTag("Inimigo"))
+        {
+            
+        }
         if (col.gameObject.tag == "Ground")
         {
             isGrounded = true;
